@@ -10,24 +10,52 @@ import org.openqa.selenium.support.ui.Select;
 
 public class LoginTestCase {
   private WebDriver wd;
-  private boolean acceptNextAlert = true;
-  private StringBuffer verificationErrors = new StringBuffer();
+  private final boolean acceptNextAlert = true;
 
   @BeforeClass(alwaysRun = true)
   public void setUp() throws Exception {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-    wd.get("http://localhost/addressbook/index.php");
-    wd.findElement(By.name("user")).sendKeys("admin");
-    wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys("secret");
-    wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
   @Test
   public void testLoginTestCase() throws Exception {
+    login("admin","secret");
+    goToGroupsPage();
+    newGroupCreate();
+    goToGroupsPage();
+    logout();
+  }
+
+  private void logout() {
     wd.findElement(By.linkText("Logout")).click();
+    wd.findElement(By.xpath("//input[@value='Login']")).click();
+  }
+
+  private void newGroupCreate() {
+    wd.findElement(By.name("new")).click();
+    wd.findElement(By.name("group_name")).click();
+    wd.findElement(By.name("group_name")).clear();
+    wd.findElement(By.name("group_name")).sendKeys("test1");
+    wd.findElement(By.name("group_header")).click();
+    wd.findElement(By.name("group_header")).clear();
+    wd.findElement(By.name("group_header")).sendKeys("ivan");
+    wd.findElement(By.name("group_footer")).click();
+    wd.findElement(By.name("group_footer")).clear();
+    wd.findElement(By.name("group_footer")).sendKeys("the best");
+    wd.findElement(By.name("submit")).click();
+  }
+
+  private void goToGroupsPage() {
+    wd.findElement(By.linkText("groups")).click();
+  }
+
+  private void login(String username,String password) {
+    wd.get("http://localhost/addressbook/index.php");
+    wd.findElement(By.name("user")).sendKeys(username);
+    wd.findElement(By.name("pass")).click();
+    wd.findElement(By.name("pass")).clear();
+    wd.findElement(By.name("pass")).sendKeys(password);
     wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
@@ -53,5 +81,4 @@ public class LoginTestCase {
       return false;
     }
   }
-
 }
