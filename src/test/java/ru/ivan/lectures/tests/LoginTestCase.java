@@ -1,4 +1,4 @@
-package ru.ivan.homework.tests;
+package ru.ivan.lectures.tests;
 
 import org.testng.annotations.*;
 

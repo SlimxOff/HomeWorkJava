@@ -1,8 +1,8 @@
-package ru.ivan.homework.tests;
+package ru.ivan.lectures.tests;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import ru.ivan.homework.appmanager.ApplicationManager;
+import ru.ivan.lectures.appmanager.ApplicationManager;
 
 public class TestBase {
 
