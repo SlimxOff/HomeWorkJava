@@ -2,15 +2,14 @@ package ru.ivan.homework.homework;
 
 import org.testng.annotations.*;
 
-public class LoginTestCase extends TestBase {
-
+public class DeleteGroup extends TestBase{
   @Test
-  public void testLoginTestCase() throws Exception {
+  public void testDeleteGroup() throws Exception {
     login("admin","secret");
     goToGroupsPage();
-    newGroupCreate();
+    selectGroup();
+    deleteSelectedGroups();
     goToGroupsPage();
-    logout();
   }
 
 }
