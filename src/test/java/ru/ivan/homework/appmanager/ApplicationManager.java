@@ -1,30 +1,27 @@
-package ru.ivan.homework.homework;
+package ru.ivan.homework.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
 
 import java.util.concurrent.TimeUnit;
 
-public class TestBase {
-    protected WebDriver wd;
+public class ApplicationManager {
+    public WebDriver wd;
 
-    @BeforeMethod(alwaysRun = true)
-    public void setUp() throws Exception {
-      wd = new FirefoxDriver();
-      wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    public void init() {
+        wd = new FirefoxDriver();
+        wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     }
 
-    protected void logout() {
+    public void logout() {
       wd.findElement(By.linkText("Logout")).click();
       wd.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
-    protected void login(String username, String password) {
+    public void login(String username, String password) {
       wd.get("http://localhost/addressbook/index.php");
       wd.findElement(By.name("user")).sendKeys(username);
       wd.findElement(By.name("pass")).click();
@@ -33,7 +30,7 @@ public class TestBase {
       wd.findElement(By.xpath("//input[@value='Login']")).click();
     }
 
-    protected void newGroupCreate() {
+    public void newGroupCreate() {
       wd.findElement(By.name("new")).click();
       wd.findElement(By.name("group_name")).click();
       wd.findElement(By.name("group_name")).clear();
@@ -47,13 +44,12 @@ public class TestBase {
       wd.findElement(By.name("submit")).click();
     }
 
-    protected void goToGroupsPage() {
+    public void goToGroupsPage() {
       wd.findElement(By.linkText("groups")).click();
     }
 
-    @AfterMethod(alwaysRun = true)
-    public void tearDown() throws Exception {
-      wd.quit();
+    public void stop() {
+        wd.quit();
     }
 
     private boolean isElementPresent(By by) {
@@ -74,11 +70,11 @@ public class TestBase {
       }
     }
 
-    protected void deleteSelectedGroups() {
+    public void deleteSelectedGroups() {
       wd.findElement(By.name("delete")).click();
     }
 
-    protected void selectGroup() {
+    public void selectGroup() {
       wd.findElement(By.name("selected[]")).click();
     }
 }
