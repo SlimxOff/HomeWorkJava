@@ -8,7 +8,6 @@ public class DeleteGroup extends TestBase {
 
   @Test
   public void testDeleteGroup(){
-//    app.getSessionHelper().login("admin","secret");
     app.getNavigationHelper().goToGroupsPage();
     app.getGroupHelper().selectGroup();
     app.getGroupHelper().deleteSelectedGroups();

@@ -6,8 +6,8 @@ public class UserAddTest extends TestBase {
 
   @Test
   public void testUserAdd() {
-    createUser();
-    logout();
+    applicationManagerContact.getContactCreateHelper().createUser();
+    applicationManagerContact.getSessionHelperContact().logout();
   }
 
 }
