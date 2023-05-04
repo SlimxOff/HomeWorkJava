@@ -27,6 +27,7 @@ build/
 *.iws
 *.iml
 *.ipr
+/allure-results
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
